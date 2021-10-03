@@ -1,10 +1,10 @@
 import './App.css';
-import Index from './components/index';
+import Todo from './components/app/todo';
 
 function App() {
   return (
     <div className="App">
-      <Index />
+      <Todo />
     </div>
   );
 }

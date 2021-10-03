@@ -1,9 +1,22 @@
 import React from 'react';
 
-function Footer({ leftTodos, todos, setTodos }) {
+function Footer({ leftTodos, todos, setTodos, setFilteredTodos, setStatus, status }) {
   const clearCompleted = () => {
     setTodos(todos.filter(todo => todo.completed !== true));
   }
+
+  const getCompletedTodos = () => {
+    setStatus('completedTodos');
+  }
+
+  const getActiveTodos = () => {
+    setStatus('actives');
+  }
+
+  const getAllTodos = () => {
+    setStatus('all');
+  }
+
   return (
     <div>
         <footer className="footer">
@@ -14,13 +27,13 @@ function Footer({ leftTodos, todos, setTodos }) {
 
           <ul className="filters">
             <li>
-              <a className="selected">All</a>
+              <a className={status === 'all' ? "selected" : null} onClick={getAllTodos}>All</a>
             </li>
             <li>
-              <a>Active</a>
+              <a className={status === 'actives' ? "selected" : null} onClick={getActiveTodos}>Active</a>
             </li>
             <li>
-              <a>Completed</a>
+              <a className={status === 'completedTodos' ? "selected" : null} onClick={getCompletedTodos}>Completed</a>
             </li>
           </ul>
 

@@ -1,13 +1,11 @@
 import React from 'react';
-function Main({ todos, setTodos }) {
+function Main({ todos, setTodos, filteredTodos }) {
   const removeTodo = (event) => {
-    console.log(event);
     const newTodoList = todos.filter((todo) => todo.id !== event);
     setTodos(newTodoList);
   }
 
   const completeTodo = (event) => {
-    console.log(event);
     setTodos(todos.map(todo => {
       if (todo.id === event) {
         return { ...todo, completed:!todo.completed };
@@ -17,7 +15,6 @@ function Main({ todos, setTodos }) {
   }
 
   const completeTodos = () => {
-    console.log("vfd");
     setTodos(todos.map(todo => {
       if (!todo.completed) {
         return { ...todo, completed:true};
@@ -38,7 +35,7 @@ function Main({ todos, setTodos }) {
 
           <ul className="todo-list">
             {
-              todos.map((todo, index) => (
+              filteredTodos.map((todo, index) => (
                 (todo.completed) ?
                 <li key={index} className="completed">
                   <div className="view">

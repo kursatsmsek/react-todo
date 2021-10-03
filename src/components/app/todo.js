@@ -8,25 +8,18 @@ function Todo() {
   const [todos, setTodos] = useState([
     {
       id: 1,
-      text: 'Oku',
+      text: "Let's Start !",
       completed: false
-    },
-    {
-      id: 2,
-      text: 'Sev',
-      completed: false
-    },
-    {
-      id: 3,
-      text: 'Yaşat',
-      completed: true
     }
   ]);
 
+  const [filteredTodos, setFilteredTodos] = useState(todos);
+
   const [leftTodos, setLeftTodos] = useState(0);
 
+  const [status, setStatus] = useState('all');
+
   useEffect(() => {
-    console.log(todos)
     let num = 0;
     {todos.map((todo) => {
       if (!todo.completed) {
@@ -34,14 +27,35 @@ function Todo() {
       }
     })}
     setLeftTodos(num)
+    if (status === 'all') {
+      setFilteredTodos(todos);
+    }
+    else if (status === 'actives') {
+      setFilteredTodos(todos.filter(todo => todo.completed !== true));
+    }
+    else if (status === 'completedTodos') {
+      setFilteredTodos(todos.filter(todo => todo.completed !== false));
+    }
   }, [todos])
+
+  useEffect(() => {
+    if (status === 'all') {
+      setFilteredTodos(todos);
+    }
+    else if (status === 'actives') {
+      setFilteredTodos(todos.filter(todo => todo.completed !== true));
+    }
+    else if (status === 'completedTodos') {
+      setFilteredTodos(todos.filter(todo => todo.completed !== false));
+    }
+  }, [status])
 
   return (
     <div>
       <section className="todoapp">
         <Header todos={todos} setTodos={setTodos} />
-        <Main todos={todos} setTodos={setTodos}/>
-        <Footer todos={todos} setTodos={setTodos} leftTodos={leftTodos}/>
+        <Main todos={todos} setTodos={setTodos} filteredTodos={filteredTodos} />
+        <Footer todos={todos} setFilteredTodos={setFilteredTodos} setTodos={setTodos} leftTodos={leftTodos} setStatus={setStatus} status={status}/>
       </section>
     </div>
 )
