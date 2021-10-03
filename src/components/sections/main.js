@@ -42,7 +42,7 @@ function Main({ todos, setTodos }) {
                 (todo.completed) ?
                 <li key={index} className="completed">
                   <div className="view">
-                    <input className="toggle" type="checkbox" onChange={() => {
+                    <input className="toggle" type="checkbox" onChange={() => {  
                       completeTodo(todo.id);
                     }} checked/>
                     <label>{todo.text}</label>
@@ -54,7 +54,9 @@ function Main({ todos, setTodos }) {
                 :
                 <li key={index}>
                   <div className="view">
-                    <input className="toggle" type="checkbox" onChange={() => {
+                    <input className="toggle" type="checkbox" 
+                    checked={todo.completed ? todo.completed : false}
+                    onChange={() => {
                       completeTodo(todo.id);
                     }} />
                     <label>{todo.text}</label>
