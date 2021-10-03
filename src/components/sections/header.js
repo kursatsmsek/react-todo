@@ -10,7 +10,7 @@ function Header({ todos, setTodos }) {
             if (event.target.value === "") {
                 return false;
             }
-            setTodos([ ...todos, {id: todos.length + 1, text:input, completed: false}]);
+            setTodos([ ...todos, {id: todos.length + 2, text:input, completed: false}]);
             setInput("");
         }
     }

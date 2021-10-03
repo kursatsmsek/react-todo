@@ -23,8 +23,17 @@ function Todo() {
     }
   ]);
 
+  const [leftTodos, setLeftTodos] = useState(0);
+
   useEffect(() => {
     console.log(todos)
+    let num = 0;
+    {todos.map((todo) => {
+      if (!todo.completed) {
+        num++;
+      }
+    })}
+    setLeftTodos(num)
   }, [todos])
 
   return (
@@ -32,7 +41,7 @@ function Todo() {
       <section className="todoapp">
         <Header todos={todos} setTodos={setTodos} />
         <Main todos={todos} setTodos={setTodos}/>
-        <Footer />
+        <Footer todos={todos} setTodos={setTodos} leftTodos={leftTodos}/>
       </section>
     </div>
 )
